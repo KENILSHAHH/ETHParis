@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 import teams from '../Assets/teams.svg';
 import { Auth } from '@polybase/auth';
 import WorldCoin from '../WorldCoin';
-import Web3Modal from '../Web3Modal';
+import HomePage from '../Homepage';
 const navigation = [
   { name: 'Add Contacts', href: '/RegisterUser' },
   { name: 'Get Access to Video Call', href: '/NFTCard' },
@@ -113,7 +113,7 @@ export default function LandingPage({ pageContents: Content }) {
           </div>
 
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Web3Modal />
+            <HomePage />
             {!hideWorldCoin && (
               <div className="flex self-center">
                 <IDKitWidget
