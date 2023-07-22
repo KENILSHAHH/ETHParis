@@ -1,18 +1,21 @@
 /** @format */
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { Web3Button } from '@web3modal/react';
+import { IDKitWidget } from '@worldcoin/idkit';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '@polybase/react';
+// import { Web3Button } from '@web3modal/react';
 import { useIsAuthenticated } from '@polybase/react';
-// import { ConnectKitButton } from 'connectkit';
-import { useAccount, useSignMessage } from 'wagmi';
 import { getAccessToken, getMessage } from '@huddle01/auth';
 import { useHuddle01 } from '@huddle01/react';
 import { useLobby, useRoom, useMeetingMachine } from '@huddle01/react/hooks';
 import { useEffect } from 'react';
 import teams from '../Assets/teams.svg';
 import { Auth } from '@polybase/auth';
+import WorldCoin from '../WorldCoin';
+import Web3Modal from '../Web3Modal';
 const navigation = [
   { name: 'Add Contacts', href: '/RegisterUser' },
   { name: 'Get Access to Video Call', href: '/NFTCard' },
@@ -29,6 +32,21 @@ export default function LandingPage({ pageContents: Content }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [accessToken, setAccessToken] = useState('');
   const { auth, state, loading } = useAuth();
+  const [hideWorldCoin, setHideWorldCoin] = useState(false);
+  const handleProof = useCallback((result) => {
+    return new ((resolve) => {
+      console.log('The result after verification is : ', result);
+      setTimeout(() => {
+        resolve();
+      }, 3000);
+      // NOTE: Example of how to decline the verification request and show an error message to the user
+    })();
+  }, []);
+
+  const onSuccess = (result) => {
+    setHideWorldCoin(true);
+    console.log(result);
+  };
   // useEffect(() => {
   //   initialize('KL1r3E1yHfcrRbXsT4mcE-3mK60Yc3YR');
   // }, []);
@@ -93,7 +111,34 @@ export default function LandingPage({ pageContents: Content }) {
               </a>
             ))}
           </div>
+
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Web3Modal />
+            {!hideWorldCoin && (
+              <div className="flex self-center">
+                <IDKitWidget
+                  action="my_action"
+                  signal="my_signal"
+                  onSuccess={onSuccess}
+                  handleVerify={handleProof}
+                  app_id="app_staging_037e4ab05939862897bb5e4590281a1c">
+                  {({ open }) => (
+                    <button
+                      style={{
+                        marginRight: '30px',
+                        border: '1px solid #000', // Replace #000 with your desired border color
+                        padding: '10px 20px', // Add some padding to make the button look better
+                        borderRadius: '5px', // Optionally, add some border-radius for rounded corners
+                      }}
+                      className="btn btn-primary btn-sm text-black"
+                      onClick={open}>
+                      Connect with world coin
+                    </button>
+                  )}
+                </IDKitWidget>
+              </div>
+            )}
+
             {isLoggedIn ? (
               <button
                 onClick={() => auth.signOut()}

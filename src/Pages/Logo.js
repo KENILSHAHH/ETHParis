@@ -45,7 +45,7 @@ function Logo() {
       <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
       <div className="text-center">
         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-          WhatsDapp !
+          ZKChat and Pay
         </h1>
         <h3
           style={{ marginTop: '40px', fontSize: '40px' }}
