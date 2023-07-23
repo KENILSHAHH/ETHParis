@@ -17,4 +17,18 @@ With the current chat apps available such as Whatsapp, Instagram etc, there is a
 
 Solution: 
 Presenting ZKChat and Pay
+ZKChat and Pay is made of XMTP protocol which allows users to chat using their ethereum address
+
+Push Protocol:
+Push protocol is used for push video to video chat among the added friends
+
+Biconomy:
+Since we need mass adoption of web users, users can login through email or any other social login methods which is verified using zero knowledge proofs by using Mina Protocol
+
+zkBob: 
+zkBob is used to pay to the friends and family that has been added to the app gaslessly similar to UPI payments to users using Whatsapp UPI in India
+
+Worldcoin:
+Users can even login using world coin to proove the personhood that they are unique user, this proof is verified on chain
+
 
