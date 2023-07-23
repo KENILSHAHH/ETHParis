@@ -30,7 +30,7 @@ import {
   configureChains,
   createConfig,
   WagmiConfig,
-  createClient,
+ 
 } from 'wagmi';
 import { arbitrum, mainnet, polygon } from 'wagmi/chains';
 
@@ -45,13 +45,6 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
-
-const client = createClient(
-  getDefaultClient({
-    autoConnect: true,
-    appName: 'Huddle01-Token-Gating',
-  })
-);
 const polybase = new Polybase();
 const auth = new Auth();
 function App() {
